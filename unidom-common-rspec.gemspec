@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Topbit Du"]
   spec.email         = ["topbit.du@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
+  spec.summary       = %q{Unidom Common RSpec 是为 Unidom Common 设计的基于 RSpec 的共享测试用例。}
   spec.description   = %q{Unidom Common RSpec is a RSpec-based Shared Example for the Unidom Common-based models. Unidom Common RSpec 是为 Unidom Common 设计的基于 RSpec 的共享测试用例。}
   spec.homepage      = "https://github.com/topbitdu/unidom-common-rspec"
   spec.license       = "MIT"
