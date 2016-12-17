@@ -5,7 +5,7 @@ require 'unidom/common/rspec/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "unidom-common-rspec"
-  spec.version       = Unidom::Common::Rspec::VERSION
+  spec.version       = Unidom::Common::RSpec::VERSION
   spec.authors       = ["Topbit Du"]
   spec.email         = ["topbit.du@gmail.com"]
 
