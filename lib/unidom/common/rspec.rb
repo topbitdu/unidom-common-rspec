@@ -2,7 +2,7 @@ require "unidom/common/rspec/version"
 
 module Unidom
   module Common
-    module Rspec
+    module RSpec
       # Your code goes here...
     end
   end
