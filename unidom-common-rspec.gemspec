@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Unidom Common RSpec 是为 Unidom Common 设计的基于 RSpec 的共享测试用例。'
   spec.description   = 'Unidom Common RSpec is a RSpec-based Shared Example for the Unidom Common-based models. Unidom Common RSpec 是为 Unidom Common 设计的基于 RSpec 的共享测试用例。'
   spec.homepage      = 'https://github.com/topbitdu/unidom-common-rspec'
-  spec.license       = "MIT"
+  spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
