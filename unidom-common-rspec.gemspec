@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'unidom-common-rspec'
   spec.version       = Unidom::Common::RSpec::VERSION
   spec.authors       = [ "Topbit Du" ]
-  spec.email         = ["topbit.du@gmail.com"]
+  spec.email         = [ "topbit.du@gmail.com" ]
 
   spec.summary       = 'Unidom Common RSpec 是为 Unidom Common 设计的基于 RSpec 的共享测试用例。'
   spec.description   = 'Unidom Common RSpec is a RSpec-based Shared Example for the Unidom Common-based models. Unidom Common RSpec 是为 Unidom Common 设计的基于 RSpec 的共享测试用例。'
