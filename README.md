@@ -28,6 +28,8 @@ Or install it yourself as:
 
 ## Usage
 
+### Scope shared examples Scope 共享用例
+
 Assume the model class is ``Person``, the ``person_spec.rb`` looks like the following:
 If the ``count_diff`` is set to 'E', an error was expected to be raised.
 ```ruby
