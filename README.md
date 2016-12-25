@@ -8,6 +8,13 @@ Unidom Common RSpec is a RSpec-based Shared Example for the Unidom Common-based 
 
 
 
+## Recent Update
+
+Check out the [Road Map](ROADMAP.md) to find out what's the next.
+Check out the [Change Log](CHANGELOG.md) to find out what's new.
+
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
