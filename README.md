@@ -1,6 +1,7 @@
 # Unidom Common RSpec Unidom Common RSpec 库
 
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](http://opensource.org/licenses/MIT)
+[![Gem Version](https://badge.fury.io/rb/unidom-common-rspec.svg)](https://badge.fury.io/rb/unidom-common-rspec)
 
 Unidom Common RSpec is a RSpec-based Shared Example for the Unidom Common-based models. Unidom Common RSpec 是为 Unidom Common 设计的基于 RSpec 的共享测试用例。
 
