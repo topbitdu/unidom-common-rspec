@@ -2,3 +2,6 @@
 
 ## v0.1
 1. Scope shared examples
+
+## v0.2
+1. Validates shared examples

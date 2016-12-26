@@ -69,6 +69,33 @@ describe Person, type: :model do
 end
 ```
 
+### Validates shared examples Validates 共享用例
+
+Assume the model class is ``Person``, the ``person_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Person, type: :model do
+
+  context '.validates' do
+
+    tim_attributes = { name: 'Tim' }
+
+    it_behaves_like 'validates', tim_attributes, :name,
+      {            } => 0,
+      { name: nil  } => 2,
+      { name: ''   } => 2,
+      { name: 'A'  } => 1,
+      { name: 'AA' } => 0,
+      { name: '0'  } => 1,
+      { name: '00' } => 0,
+      { name: 0    } => 1
+
+  end
+
+end
+```
+
 
 
 ## Development
