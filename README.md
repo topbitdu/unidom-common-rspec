@@ -51,18 +51,21 @@ describe Person, type: :model do
     it_behaves_like 'scope', :all, [
       { attributes_collection: [ model_attributes                            ], count_diff: 1, args: [] },
       { attributes_collection: [ model_attributes.merge(defunct:   true)     ], count_diff: 1, args: [] },
-      { attributes_collection: [ model_attributes.merge(closed_at: Time.now) ], count_diff: 1, args: [] } ]
+      { attributes_collection: [ model_attributes.merge(closed_at: Time.now) ], count_diff: 1, args: [] }
+    ]
 
     it_behaves_like 'scope', :none, [
       { attributes_collection: [ model_attributes                            ], count_diff: 0, args: [] },
       { attributes_collection: [ model_attributes.merge(defunct:   true)     ], count_diff: 0, args: [] },
-      { attributes_collection: [ model_attributes.merge(closed_at: Time.now) ], count_diff: 0, args: [] } ]
+      { attributes_collection: [ model_attributes.merge(closed_at: Time.now) ], count_diff: 0, args: [] }
+    ]
 
     it_behaves_like 'scope', :transited_to, [
       { attributes_collection: [ model_attributes                   ], count_diff: 1, args: [ 'C' ] },
       { attributes_collection: [ model_attributes                   ], count_diff: 0, args: [ 'A' ] },
       { attributes_collection: [ model_attributes.merge(state: 'A') ], count_diff: 0, args: [ 'C' ] },
-      { attributes_collection: [ model_attributes.merge(state: 'A') ], count_diff: 1, args: [ 'A' ] } ]
+      { attributes_collection: [ model_attributes.merge(state: 'A') ], count_diff: 1, args: [ 'A' ] }
+    ]
 
   end
 
