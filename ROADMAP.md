@@ -8,3 +8,6 @@
 
 ## v0.3
 1. Model Extension shared examples
+
+## v0.4
+1. Has Many shared examples
