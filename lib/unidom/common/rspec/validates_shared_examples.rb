@@ -32,4 +32,5 @@ shared_examples 'validates' do |model_attributes, attribute_name, error_attribut
     end
 
   end
+
 end
