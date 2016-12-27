@@ -99,7 +99,24 @@ describe Person, type: :model do
 end
 ```
 
+### Model Extension shared examples Model Extension 共享用例
 
+Assume the model class is ``Person``, and the model alread extend the ``Unidom::Common::Concerns::ModelExtension``, the ``person_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Person, type: :model do
+
+  context do
+
+    tim_attributes = { name: 'Tim' }
+
+    it_behaves_like 'Unidom::Common::Concerns::ModelExtension', model_attributes
+
+  end
+
+end
+```
 
 ## Development
 
