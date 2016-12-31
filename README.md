@@ -120,7 +120,7 @@ end
 
 ### Has Many shared examples Has Many 共享用例
 
-Assume the model class is ``Person``, and the model alread defined the ``has_many :pets``, the ``person_spec.rb`` looks like the following:
+Assume the model class is ``Person``, and the model already defined the ``has_many :pets``, the ``person_spec.rb`` looks like the following:
 ```ruby
 require 'rails_helper'
 
@@ -133,6 +133,26 @@ describe Person, type: :model do
     dog_attribtues = { name: 'Flower', species: 'Chihuahua' }
 
     it_behaves_like 'has_many', tim_attributes, :pets, 'Pet', [ cat_attributes, dog_attribtues ]
+
+  end
+
+end
+```
+
+### Belongs To shared examples Belongs To 共享用例
+
+Assume the model class is ``Pet``, and the model already defined the ``belongs_to :person``, the ``pet_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Pet, type: :model do
+
+  context do
+
+    cat_attributes = { name: 'Pearl', species: 'Persian' }
+    tim_attributes = { name: 'Tim' }
+
+    it_behaves_like 'belongs_to', cat_attributes, :person, Person, tim_attributes
 
   end
 
