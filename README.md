@@ -35,9 +35,30 @@ Or install it yourself as:
 
 ## Usage
 
+Assume we have the Person model & the Pet model as the following:
+```ruby
+# person.rb
+class Person < ApplicationRecord
+
+  include Unidom::Common::Concerns::ModelExtension
+
+  has_many :pets
+
+end
+
+# pet.rb
+class Pet < ApplicationRecord
+
+  include Unidom::Common::Concerns::ModelExtension
+
+  belongs_to :person
+
+end
+```
+
 ### Scope shared examples Scope 共享用例
 
-Assume the model class is ``Person``, the ``person_spec.rb`` looks like the following:
+The ``person_spec.rb`` looks like the following:
 If the ``count_diff`` is set to 'E', an error was expected to be raised.
 ```ruby
 require 'rails_helper'
@@ -74,7 +95,7 @@ end
 
 ### Validates shared examples Validates 共享用例
 
-Assume the model class is ``Person``, the ``person_spec.rb`` looks like the following:
+The ``person_spec.rb`` looks like the following:
 ```ruby
 require 'rails_helper'
 
@@ -99,28 +120,9 @@ describe Person, type: :model do
 end
 ```
 
-### Model Extension shared examples Model Extension 共享用例
-
-Assume the model class is ``Person``, and the model alread extend the ``Unidom::Common::Concerns::ModelExtension``, the ``person_spec.rb`` looks like the following:
-```ruby
-require 'rails_helper'
-
-describe Person, type: :model do
-
-  context do
-
-    tim_attributes = { name: 'Tim' }
-
-    it_behaves_like 'Unidom::Common::Concerns::ModelExtension', tim_attributes
-
-  end
-
-end
-```
-
 ### Has Many shared examples Has Many 共享用例
 
-Assume the model class is ``Person``, and the model already defined the ``has_many :pets``, the ``person_spec.rb`` looks like the following:
+The ``person_spec.rb`` looks like the following:
 ```ruby
 require 'rails_helper'
 
@@ -141,7 +143,7 @@ end
 
 ### Belongs To shared examples Belongs To 共享用例
 
-Assume the model class is ``Pet``, and the model already defined the ``belongs_to :person``, the ``pet_spec.rb`` looks like the following:
+The ``pet_spec.rb`` looks like the following:
 ```ruby
 require 'rails_helper'
 
@@ -153,6 +155,25 @@ describe Pet, type: :model do
     tim_attributes = { name: 'Tim' }
 
     it_behaves_like 'belongs_to', cat_attributes, :person, Person, tim_attributes
+
+  end
+
+end
+```
+
+### Model Extension shared examples Model Extension 共享用例
+
+The ``person_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Person, type: :model do
+
+  context do
+
+    tim_attributes = { name: 'Tim' }
+
+    it_behaves_like 'Unidom::Common::Concerns::ModelExtension', tim_attributes
 
   end
 
