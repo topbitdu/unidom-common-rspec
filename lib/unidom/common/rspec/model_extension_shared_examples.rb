@@ -200,11 +200,11 @@ shared_examples 'Unidom::Common::Concerns::ModelExtension' do |model_attributes|
   if grade_column.present?&&:integer==grade_column.type
 
     it_behaves_like 'validates', model_attributes, :grade,
-      {             } => 3,
-      { grade: nil  } => 3,
-      { grade: ''   } => 3,
-      { grade: 'A'  } => 2,
-      { grade: 'AA' } => 2,
+      #{             } => 3,
+      { grade: nil  } => 2,
+      { grade: ''   } => 2,
+      { grade: 'A'  } => 1,
+      { grade: 'AA' } => 1,
       { grade: -1   } => 1,
       { grade: -11  } => 1,
       { grade: 1.1  } => 1,
@@ -242,11 +242,11 @@ shared_examples 'Unidom::Common::Concerns::ModelExtension' do |model_attributes|
   if priority_column.present?&&:integer==priority_column.type
 
     it_behaves_like 'validates', model_attributes, :priority,
-      {                } => 3,
-      { priority: nil  } => 3,
-      { priority: ''   } => 3,
-      { priority: 'A'  } => 2,
-      { priority: 'AA' } => 2,
+      #{                } => 3,
+      { priority: nil  } => 2,
+      { priority: ''   } => 2,
+      { priority: 'A'  } => 1,
+      { priority: 'AA' } => 1,
       { priority: -1   } => 1,
       { priority: -11  } => 1,
       { priority: 1.1  } => 1,
@@ -257,19 +257,19 @@ shared_examples 'Unidom::Common::Concerns::ModelExtension' do |model_attributes|
       { priority: 1    } => 0,
       { priority: 11   } => 0
 
-    it_behaves_like 'scope', :grade_is, [
+    it_behaves_like 'scope', :priority_is, [
       { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]-1 ] },
       { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority]   ] },
       { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]+1 ] }
     ]
 
-    it_behaves_like 'scope', :grade_higher_than, [
+    it_behaves_like 'scope', :priority_higher_than, [
       { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority]-1 ] },
       { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]   ] },
       { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]+1 ] }
     ]
 
-    it_behaves_like 'scope', :grade_lower_than, [
+    it_behaves_like 'scope', :priority_lower_than, [
       { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]-1 ] },
       { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]   ] },
       { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority]+1 ] }
