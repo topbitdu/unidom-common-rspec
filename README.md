@@ -43,11 +43,21 @@ class Person < ApplicationRecord
   include Unidom::Common::Concerns::ModelExtension
 
   has_many :pets
+  has_one  :identity_card
 
 end
 
 # pet.rb
 class Pet < ApplicationRecord
+
+  include Unidom::Common::Concerns::ModelExtension
+
+  belongs_to :person
+
+end
+
+# identity_card.rb
+class IdentityCard < ApplicationRecord
 
   include Unidom::Common::Concerns::ModelExtension
 
@@ -134,7 +144,27 @@ describe Person, type: :model do
     cat_attributes = { name: 'Pearl',  species: 'Persian'   }
     dog_attribtues = { name: 'Flower', species: 'Chihuahua' }
 
-    it_behaves_like 'has_many', tim_attributes, :pets, 'Pet', [ cat_attributes, dog_attribtues ]
+    it_behaves_like 'has_many', tim_attributes, :pets, Pet, [ cat_attributes, dog_attribtues ]
+
+  end
+
+end
+```
+
+### Has One shared examples Has Many 共享用例
+
+The ``person_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Person, type: :model do
+
+  context do
+
+    tim_attributes = { name: 'Tim' }
+    tim_identity_card_attributes = { name: 'Tim', gender_code: '1', birth_date: '1980-07-01' }
+
+    it_behaves_like 'has_one', tim_attributes, :identity_card, IdentityCard, tim_identity_card_attributes
 
   end
 
@@ -155,6 +185,24 @@ describe Pet, type: :model do
     tim_attributes = { name: 'Tim' }
 
     it_behaves_like 'belongs_to', cat_attributes, :person, Person, tim_attributes
+
+  end
+
+end
+```
+
+The ``identity_card_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe IdentityCard, type: :model do
+
+  context do
+
+    tim_attributes = { name: 'Tim' }
+    tim_identity_card_attributes = { name: 'Tim', gender_code: '1', birth_date: '1980-07-01' }
+
+    it_behaves_like 'belongs_to', tim_identity_card_attributes, :person, Person, tim_attributes
 
   end
 
