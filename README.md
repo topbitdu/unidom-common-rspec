@@ -35,7 +35,7 @@ Or install it yourself as:
 
 ## Usage
 
-Assume we have the Person model & the Pet model as the following:
+Assume we have the Person model, the Pet model, & the Identity Card model as the following:
 ```ruby
 # person.rb
 class Person < ApplicationRecord
@@ -130,6 +130,44 @@ describe Person, type: :model do
 end
 ```
 
+### Belongs To shared examples Belongs To 共享用例
+
+The ``pet_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Pet, type: :model do
+
+  context do
+
+    cat_attributes = { name: 'Pearl', species: 'Persian' }
+    tim_attributes = { name: 'Tim' }
+
+    it_behaves_like 'belongs_to', cat_attributes, :person, Person, tim_attributes
+
+  end
+
+end
+```
+
+The ``identity_card_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe IdentityCard, type: :model do
+
+  context do
+
+    tim_attributes = { name: 'Tim' }
+    tim_identity_card_attributes = { name: 'Tim', gender_code: '1', birth_date: '1980-07-01' }
+
+    it_behaves_like 'belongs_to', tim_identity_card_attributes, :person, Person, tim_attributes
+
+  end
+
+end
+```
+
 ### Has Many shared examples Has Many 共享用例
 
 The ``person_spec.rb`` looks like the following:
@@ -171,44 +209,6 @@ describe Person, type: :model do
 end
 ```
 
-### Belongs To shared examples Belongs To 共享用例
-
-The ``pet_spec.rb`` looks like the following:
-```ruby
-require 'rails_helper'
-
-describe Pet, type: :model do
-
-  context do
-
-    cat_attributes = { name: 'Pearl', species: 'Persian' }
-    tim_attributes = { name: 'Tim' }
-
-    it_behaves_like 'belongs_to', cat_attributes, :person, Person, tim_attributes
-
-  end
-
-end
-```
-
-The ``identity_card_spec.rb`` looks like the following:
-```ruby
-require 'rails_helper'
-
-describe IdentityCard, type: :model do
-
-  context do
-
-    tim_attributes = { name: 'Tim' }
-    tim_identity_card_attributes = { name: 'Tim', gender_code: '1', birth_date: '1980-07-01' }
-
-    it_behaves_like 'belongs_to', tim_identity_card_attributes, :person, Person, tim_attributes
-
-  end
-
-end
-```
-
 ### Model Extension shared examples Model Extension 共享用例
 
 The ``person_spec.rb`` looks like the following:
@@ -227,6 +227,8 @@ describe Person, type: :model do
 
 end
 ```
+
+
 
 ## Development
 
