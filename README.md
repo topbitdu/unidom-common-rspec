@@ -71,6 +71,8 @@ end
 The ``person_spec.rb`` looks like the following:
 If the ``count_diff`` is set to 'E', an error was expected to be raised.
 ```ruby
+# The :all scope and the :none scope are the scopes defined by Rails.
+# The :transited_to scope is defined by Model Extension.
 require 'rails_helper'
 
 describe Person, type: :model do
