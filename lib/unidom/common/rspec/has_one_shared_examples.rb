@@ -41,7 +41,7 @@ shared_examples 'has_one' do |model_attributes, association_name, association_cl
       [ "create_#{association_name}", "create_#{association_name}!" ].each do |method_name|
         context "##{method_name}" do
           subject do described_class.create! model_attributes end
-          let :created_association_instance do subject.send method_name, association_attributes end
+          let :created_association_instance          do subject.send method_name, association_attributes                                 end
           it "should be a #{association_class.name}" do expect(created_association_instance).to     be_an_instance_of(association_class) end
           it 'should not be a new record'            do expect(created_association_instance).to_not be_new_record                        end
         end
