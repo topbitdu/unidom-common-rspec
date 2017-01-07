@@ -12,11 +12,11 @@ shared_examples 'has_many' do |model_attributes, collection_name, item_class, it
     #association_immutable = reflection.source_reflection.blank? ? false : (:belongs_to != reflection.source_reflection.macro)
     association_immutable = reflection.source_reflection.blank? ? false : being_through&&![ :belongs_to ].include?(reflection.source_reflection.macro)
 
-    [ collection_name, "#{collection_name}=", "#{collection_name.to_s.singularize}_ids", "#{collection_name.to_s.singularize}_ids=" ].each do |method|
-      describe "##{method}" do
-        it 'is responded to' do expect(model_instance).to respond_to(method.to_sym) end
-      end
-    end
+    #[ collection_name, "#{collection_name}=", "#{collection_name.to_s.singularize}_ids", "#{collection_name.to_s.singularize}_ids=" ].each do |method|
+    #  describe "##{method}" do
+    #    it 'is responded to' do expect(model_instance).to respond_to(method.to_sym) end
+    #  end
+    #end
 
     %w{ << push concat build create create! size length count sum where empty? clear delete delete_all destroy destroy_all find exists? uniq reset }.each do |method|
 
@@ -25,7 +25,7 @@ shared_examples 'has_many' do |model_attributes, collection_name, item_class, it
         before :each do collection.clear if collection.present? end
         after  :each do collection.clear if collection.present? end
 
-        it 'is responded to' do expect(collection).to respond_to(method.to_sym) end
+        #it 'is responded to' do expect(collection).to respond_to(method.to_sym) end
 
         case method
 
@@ -45,6 +45,7 @@ shared_examples 'has_many' do |model_attributes, collection_name, item_class, it
               end
             end
 
+=begin
           when 'build'
             if association_readonly #or association_immutable
               it 'nested association can not build' do
@@ -62,17 +63,48 @@ shared_examples 'has_many' do |model_attributes, collection_name, item_class, it
                 expect(item_1).to_not be(item_2)
               end
             end
+=end
 
         end
 
       end
     end
 
-    # The following method(s) does not exist. Who know why?
-    %w{}.each do |method|
-      it "##{method}" do
-        pending ":#{method} method does not exist."
-        expect(collection).to respond_to(method.to_sym)
+    subject do described_class.new model_attributes end
+
+    [ collection_name, "#{collection_name}=", "#{collection_name.to_s.singularize}_ids", "#{collection_name.to_s.singularize}_ids=" ].each do |method_name|
+      it do is_expected.to respond_to(method_name.to_sym) end
+    end
+
+    %w{ << push concat build create create! size length count sum where empty? clear delete delete_all destroy destroy_all find exists? uniq reset }.each do |method_name|
+      it "should respond to ##{collection_name}##{method_name}" do
+        expect(subject.send collection_name).to respond_to(method_name.to_sym)
+      end
+    end
+
+    describe "##{collection_name}#build" do
+      if association_readonly
+        it 'nested association can not build' do
+          error_class = association_readonly ? ActiveRecord::HasManyThroughNestedAssociationsAreReadonly : ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection
+          expect { collection.build }.to raise_error(error_class)
+        end
+      else
+        let :item_1                          do collection.build                       end
+        let :item_2                          do collection.build                       end
+        it  "should be a #{item_class.name}" do expect(item_1).to     be_a(item_class) end
+        it  'should not be a new record'     do expect(item_1).to     be_new_record    end
+        it  "should be a #{item_class.name}" do expect(item_2).to     be_a(item_class) end
+        it  'should not be a new record'     do expect(item_2).to     be_new_record    end
+        it  'should not be identical'        do expect(item_1).to_not be(item_2)       end
+      end
+    end
+
+    %w{ create create! }.each do |method_name|
+      context "##{collection_name}##{method_name}" do
+        subject do described_class.create! model_attributes end
+        let :created_item_instance          do subject.send(collection_name).send   method_name, item_attributes_collection.first end
+        it "should be a #{item_class.name}" do expect(created_item_instance).to     be_a(item_class)                              end
+        it 'should not be a new record'     do expect(created_item_instance).to_not be_new_record                                 end
       end
     end
 
