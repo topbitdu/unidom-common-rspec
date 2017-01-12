@@ -26,3 +26,6 @@
 
 ## v0.6.2
 1. Improve the Has Many shared examples for the #collection.build method, the #collection.create method, & the #collection.create! method
+
+## v0.7
+1. Each Validator shared examples
