@@ -37,7 +37,7 @@ Or install it yourself as:
 
 ## Usage
 
-Assume we have the Person model, the Pet model, & the Identity Card model as the following:
+Assume we have the Person model, the Pet model, the Identity Card model, & the Identification Number validator as the following:
 ```ruby
 # person.rb
 class Person < ApplicationRecord
@@ -63,7 +63,27 @@ class IdentityCard < ApplicationRecord
 
   include Unidom::Common::Concerns::ModelExtension
 
+  validates :identification_number, presence: true, identification_number: true
+
   belongs_to :person
+
+end
+
+# identification_number_validator.rb
+class IdentificationNumberValidator < ActiveModel::EachValidator
+
+  WEIGHTS      = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ].freeze
+  CHECK_DIGITS = %w{1 0 X 9 8 7 6 5 4 3 2}.freeze
+
+  def validate_each(record, attribute, value)
+
+    value = value.to_s
+    sum   = 0
+    value[0..16].chars.each_with_index do |char, index| sum += char.to_i*WEIGHTS[index] end
+
+    record.errors[attribute] << (options[:message]||'is invalid') unless CHECK_DIGITS[sum%11]==value[17]
+
+  end
 
 end
 ```
@@ -228,6 +248,33 @@ describe Person, type: :model do
     it_behaves_like 'Unidom::Common::Concerns::ModelExtension', tim_attributes
 
   end
+
+end
+```
+
+
+### Each Validator shared examples Each Validator 共享用例
+
+The ``identification_number_validator_spec.rb`` looks like the following:
+```ruby
+RSpec.describe IdentificationNumberValidator, type: :validator do
+
+  valid_values = %w{
+      231024198506186916
+      231024198506188110
+      231024198506185470
+      231024198506182851
+      231024198506187193
+    }
+  invalid_values = %w{
+      231024198506186917
+      231024198506188111
+      231024198506185471
+      231024198506182852
+      231024198506187194
+    }
+
+  it_behaves_like 'ActiveModel::EachValidator', valid_values, invalid_values
 
 end
 ```
