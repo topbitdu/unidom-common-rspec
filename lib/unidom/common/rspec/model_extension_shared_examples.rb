@@ -131,11 +131,11 @@ shared_examples 'Unidom::Common::Concerns::ModelExtension' do |model_attributes|
   if ordinal_column.present?&&:integer==ordinal_column.type
 
     it_behaves_like 'validates', model_attributes, :ordinal,
-      {               } => 3,
-      { ordinal: nil  } => 3,
-      { ordinal: ''   } => 3,
-      { ordinal: 'A'  } => 2,
-      { ordinal: 'AA' } => 2,
+      {               } => 0,
+      { ordinal: nil  } => 2,
+      { ordinal: ''   } => 2,
+      { ordinal: 'A'  } => 1,
+      { ordinal: 'AA' } => 1,
       { ordinal: '0'  } => 1,
       { ordinal: 0    } => 1,
       { ordinal: -1   } => 1,
@@ -147,9 +147,9 @@ shared_examples 'Unidom::Common::Concerns::ModelExtension' do |model_attributes|
       { ordinal: 11   } => 0
 
     it_behaves_like 'scope', :ordinal_is, [
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:ordinal]-1 ] },
-      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:ordinal]   ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:ordinal]+1 ] }
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:ordinal].to_i-1 ] },
+      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:ordinal].to_i   ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:ordinal].to_i+1 ] }
     ]
 
   end
@@ -216,21 +216,21 @@ shared_examples 'Unidom::Common::Concerns::ModelExtension' do |model_attributes|
       { grade: 11   } => 0
 
     it_behaves_like 'scope', :grade_is, [
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade]-1 ] },
-      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:grade]   ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade]+1 ] }
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade].to_i-1 ] },
+      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:grade].to_i   ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade].to_i+1 ] }
     ]
 
     it_behaves_like 'scope', :grade_higher_than, [
-      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:grade]-1 ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade]   ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade]+1 ] }
+      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:grade].to_i-1 ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade].to_i   ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade].to_i+1 ] }
     ]
 
     it_behaves_like 'scope', :grade_lower_than, [
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade]-1 ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade]   ] },
-      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:grade]+1 ] }
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade].to_i-1 ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:grade].to_i   ] },
+      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:grade].to_i+1 ] }
     ]
 
   end
@@ -258,21 +258,21 @@ shared_examples 'Unidom::Common::Concerns::ModelExtension' do |model_attributes|
       { priority: 11   } => 0
 
     it_behaves_like 'scope', :priority_is, [
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]-1 ] },
-      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority]   ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]+1 ] }
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority].to_i-1 ] },
+      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority].to_i   ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority].to_i+1 ] }
     ]
 
     it_behaves_like 'scope', :priority_higher_than, [
-      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority]-1 ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]   ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]+1 ] }
+      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority].to_i-1 ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority].to_i   ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority].to_i+1 ] }
     ]
 
     it_behaves_like 'scope', :priority_lower_than, [
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]-1 ] },
-      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority]   ] },
-      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority]+1 ] }
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority].to_i-1 ] },
+      { attributes_collection: [ model_attributes ], count_diff: 0, args: [ model_attributes[:priority].to_i   ] },
+      { attributes_collection: [ model_attributes ], count_diff: 1, args: [ model_attributes[:priority].to_i+1 ] }
     ]
 
   end
