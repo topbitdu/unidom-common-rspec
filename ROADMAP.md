@@ -21,7 +21,7 @@
 1. Has One shared examples
 
 ## v0.6.1
-1. Improve the Belongs To shared examples for the #build_association method, the #create_association method, & the #create_association! method
+1. Improve the Belongs To shared examples for the #``build_association`` method, the #create_association method, & the #create_association! method
 2. Improve the Has One shared examples for the #build_association method, the #create_association method, & the #create_association! method
 
 ## v0.6.2
