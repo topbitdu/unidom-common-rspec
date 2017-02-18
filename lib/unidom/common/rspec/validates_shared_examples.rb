@@ -22,8 +22,8 @@ shared_examples 'validates' do |model_attributes, attribute_name, error_attribut
         count_errors = "has #{error_count} error#{error_count>1 ? 's' : ''}"
 
         if error_count>0
-          it 'is invalid' do expect(error_instance).to be_invalid                                  end
-          it count_errors do expect(error_instance.errors[attribute_name].size).to eq(error_count) end
+          it 'is invalid' do expect(error_instance).to be_invalid end
+          it count_errors do expect(error_instance.errors[attribute_name].size).to eq(error_count), "expected: #{error_count} error#{1!=error_count ? 's' : ''}\n     got: #{error_instance.errors[attribute_name].size} error#{1!=error_instance.errors[attribute_name].size ? 's' : ''}: #{error_instance.errors[attribute_name].map(&:inspect).join ', '}" end
         else
           it 'is valid' do expect(error_instance).to be_valid end
         end
