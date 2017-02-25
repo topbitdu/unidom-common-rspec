@@ -35,4 +35,4 @@
 2. Improved the Model Extension shared examples for the #ordinal validation
 
 ## v0.7.2
-1. Improve the Validates shared examples for the failure message
+1. Improved the Validates shared examples for the failure message
