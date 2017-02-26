@@ -25,7 +25,7 @@
 2. Improve the Has One shared examples for the #``build_association`` method, the #``create_association`` method, & the #``create_association!`` method
 
 ## v0.6.2
-1. Improve the Has Many shared examples for the #``collection.build`` method, the #collection.create method, & the #collection.create! method
+1. Improve the Has Many shared examples for the #``collection.build`` method, the #``collection.create`` method, & the #collection.create! method
 
 ## v0.7
 1. Each Validator shared examples
