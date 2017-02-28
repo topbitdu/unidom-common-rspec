@@ -36,3 +36,7 @@
 
 ## v0.7.2
 1. Improve the Validates shared examples for the failure message
+
+## v0.8
+1. Monomorphic Scope shared examples
+2. Polymorphic Scope shared examples
