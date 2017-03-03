@@ -54,7 +54,9 @@ class Pet < ApplicationRecord
 
   include Unidom::Common::Concerns::ModelExtension
 
-  belongs_to :person
+  belongs_to :owner, polymorphic: true
+
+  scope :owned_by, ->(owner) { where owner: owner }
 
 end
 
@@ -66,6 +68,8 @@ class IdentityCard < ApplicationRecord
   validates :identification_number, presence: true, identification_number: true
 
   belongs_to :person
+
+  scope :owned_by, ->(owner) { where person_id: to_id(owner) }
 
 end
 
@@ -121,6 +125,44 @@ describe Person, type: :model do
       { attributes_collection: [ model_attributes.merge(state: 'A') ], count_diff: 0, args: [ 'C' ] },
       { attributes_collection: [ model_attributes.merge(state: 'A') ], count_diff: 1, args: [ 'A' ] }
     ]
+
+  end
+
+end
+```
+
+### Monomorphic Scope shared examples 单态 Scope 共享用例
+
+The ``identity_card_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe IdentityCard, type: :model do
+
+  context do
+
+    tim_identity_card_attributes = { name: 'Tim', gender_code: '1', birth_date: '1980-07-01' }
+
+    it_behaves_like 'monomorphic scope', tim_identity_card_attributes, :owned_by, :person
+
+  end
+
+end
+```
+
+### Polymorphic Scope shared examples 多态 Scope 共享用例
+
+The ``pet_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Pet, type: :model do
+
+  context do
+
+    cat_attributes = { name: 'Pearl', species: 'Persian' }
+
+    it_behaves_like 'polymorphic scope', cat_attributes, :owned_by, :person, [ Person ]
 
   end
 
