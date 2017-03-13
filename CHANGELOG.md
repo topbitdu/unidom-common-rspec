@@ -40,3 +40,7 @@
 ## v0.8
 1. Monomorphic Scope shared examples
 2. Polymorphic Scope shared examples
+
+## v0.9
+1. Validates Text shared examples
+2. Validates Numericality shared examples

@@ -92,7 +92,7 @@ class IdentificationNumberValidator < ActiveModel::EachValidator
 end
 ```
 
-### Scope shared examples Scope 共享用例
+### Scope shared examples 范围共享用例
 
 The ``person_spec.rb`` looks like the following:
 If the ``count_diff`` is set to 'E', an error was expected to be raised.
@@ -131,7 +131,7 @@ describe Person, type: :model do
 end
 ```
 
-### Monomorphic Scope shared examples 单态 Scope 共享用例
+### Monomorphic Scope shared examples 单态范围共享用例
 
 The ``identity_card_spec.rb`` looks like the following:
 ```ruby
@@ -150,7 +150,7 @@ describe IdentityCard, type: :model do
 end
 ```
 
-### Polymorphic Scope shared examples 多态 Scope 共享用例
+### Polymorphic Scope shared examples 多态范围共享用例
 
 The ``pet_spec.rb`` looks like the following:
 ```ruby
@@ -169,7 +169,7 @@ describe Pet, type: :model do
 end
 ```
 
-### Validates shared examples Validates 共享用例
+### Validates shared examples 验证规则共享用例
 
 The ``person_spec.rb`` looks like the following:
 ```ruby
@@ -196,7 +196,46 @@ describe Person, type: :model do
 end
 ```
 
-### Belongs To shared examples Belongs To 共享用例
+### Validates Text shared examples 自由文本验证规则共享用例
+
+The ``person_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Person, type: :model do
+
+  context '.validates' do
+
+    tim_attributes = { name: 'Tim' }
+
+    it_behaves_like 'validates text', tim_attributes, :name, length: 2..columns_hash['name'].limit
+
+  end
+
+end
+```
+
+### Validates Numericality shared examples 数字验证规则共享用例
+
+The ``person_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Person, type: :model do
+
+  context '.validates' do
+
+    tim_attributes = { name: 'Tim', age: 28 }
+
+    it_behaves_like 'validates numericality', tim_attributes, :age,
+      range: 0..150, minimum_inclusive: true, maximum_inclusive: true, only_integer: true
+
+  end
+
+end
+```
+
+### Belongs To shared examples 属于关联共享用例
 
 The ``pet_spec.rb`` looks like the following:
 ```ruby
@@ -234,7 +273,7 @@ describe IdentityCard, type: :model do
 end
 ```
 
-### Has Many shared examples Has Many 共享用例
+### Has Many shared examples 拥有多个共享用例
 
 The ``person_spec.rb`` looks like the following:
 ```ruby
@@ -255,7 +294,7 @@ describe Person, type: :model do
 end
 ```
 
-### Has One shared examples Has Many 共享用例
+### Has One shared examples 拥有单个共享用例
 
 The ``person_spec.rb`` looks like the following:
 ```ruby
@@ -275,7 +314,7 @@ describe Person, type: :model do
 end
 ```
 
-### Model Extension shared examples Model Extension 共享用例
+### Model Extension shared examples 模型公共扩展共享用例
 
 The ``person_spec.rb`` looks like the following:
 ```ruby
@@ -295,7 +334,7 @@ end
 ```
 
 
-### Each Validator shared examples Each Validator 共享用例
+### Each Validator shared examples 单属性验证器共享用例
 
 The ``identification_number_validator_spec.rb`` looks like the following:
 ```ruby
