@@ -31,7 +31,7 @@
 1. Each Validator shared examples
 
 ## v0.7.1
-1. Improve the Model Extension shared examples for the ``ordinal_is`` scope, the .grade_is scope, the .grade_higher_than scope, the .grade_lower_than scope, the .priority_is scope, the .priority_higher_than scope, & the .priority_lower_than scope
+1. Improve the Model Extension shared examples for the ``ordinal_is`` scope, the ``grade_is`` scope, the .grade_higher_than scope, the .grade_lower_than scope, the .priority_is scope, the .priority_higher_than scope, & the .priority_lower_than scope
 2. Improve the Model Extension shared examples for the #ordinal validation
 
 ## v0.7.2
