@@ -44,3 +44,6 @@
 ## v0.9
 1. Validates Text shared examples
 2. Validates Numericality shared examples
+
+## v0.9.1
+1. Improve the Validates Text shared examples for the length
