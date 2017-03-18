@@ -60,13 +60,20 @@ shared_examples 'validates text' do |model_attributes, attribute_name, options|
   symbols = '~`!@#$%^&*()-_=+{}[];:"\',.<>/?\\|'.chars
   chars   = numbers+letters+symbols
 
-  chars.each do |c| attributes_collection[ { attribute_name => c                    } ] = 0 end if 1==minimum_length
-  chars.each do |c| attributes_collection[ { attribute_name => c*(minimum_length-1) } ] = 1 end if minimum_length>1
-  chars.each do |c| attributes_collection[ { attribute_name => c*minimum_length     } ] = 0 end
-  chars.each do |c| attributes_collection[ { attribute_name => c*(minimum_length+1) } ] = 0 end if minimum_length<maximum_length
-  chars.each do |c| attributes_collection[ { attribute_name => c*(maximum_length-1) } ] = 0 end
-  chars.each do |c| attributes_collection[ { attribute_name => c*maximum_length     } ] = 0 end
-  chars.each do |c| attributes_collection[ { attribute_name => c*(maximum_length+1) } ] = 1 end
+  if minimum_length==maximum_length
+    length = maximum_length
+    chars.each do |c| attributes_collection[ { attribute_name => c*(length-1) } ] = 1 end
+    chars.each do |c| attributes_collection[ { attribute_name => c*length     } ] = 0 end
+    chars.each do |c| attributes_collection[ { attribute_name => c*(length+1) } ] = 1 end
+  else
+    chars.each do |c| attributes_collection[ { attribute_name => c                    } ] = 0 end if 1==minimum_length
+    chars.each do |c| attributes_collection[ { attribute_name => c*(minimum_length-1) } ] = 1 end if minimum_length>1
+    chars.each do |c| attributes_collection[ { attribute_name => c*minimum_length     } ] = 0 end
+    chars.each do |c| attributes_collection[ { attribute_name => c*(minimum_length+1) } ] = 0 end if minimum_length<maximum_length
+    chars.each do |c| attributes_collection[ { attribute_name => c*(maximum_length-1) } ] = 0 end
+    chars.each do |c| attributes_collection[ { attribute_name => c*maximum_length     } ] = 0 end
+    chars.each do |c| attributes_collection[ { attribute_name => c*(maximum_length+1) } ] = 1 end
+  end
 
   it_behaves_like 'validates', model_attributes, attribute_name, attributes_collection
 
