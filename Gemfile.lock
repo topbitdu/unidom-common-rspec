@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    unidom-common-rspec (0.9)
+    unidom-common-rspec (0.9.1)
 
 GEM
   remote: https://rubygems.org/
