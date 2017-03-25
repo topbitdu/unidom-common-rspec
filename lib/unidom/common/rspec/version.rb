@@ -1,7 +1,7 @@
 module Unidom
   module Common
     module RSpec
-      VERSION = '0.9.1'
+      VERSION = '0.10'
     end
   end
 end
