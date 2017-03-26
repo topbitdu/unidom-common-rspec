@@ -47,6 +47,12 @@ class Person < ApplicationRecord
   has_many :pets
   has_one  :identity_card
 
+  def own_identity_card!(identity_card, at: Time.now)
+    self.identity_card.soft_destroy
+    self.identity_card = identity_card
+    save!
+  end
+
 end
 
 # pet.rb
@@ -333,7 +339,6 @@ describe Person, type: :model do
 end
 ```
 
-
 ### Each Validator shared examples 单属性验证器共享用例
 
 The ``identification_number_validator_spec.rb`` looks like the following:
@@ -356,6 +361,28 @@ RSpec.describe IdentificationNumberValidator, type: :validator do
     }
 
   it_behaves_like 'ActiveModel::EachValidator', valid_values, invalid_values
+
+end
+```
+
+### Assert Present shared examples 必填参数共享用例
+The ``person_spec.rb`` looks like the following:
+```ruby
+require 'rails_helper'
+
+describe Person, type: :model do
+
+  context do
+
+    tim_attributes = { name: 'Tim' }
+    model = described_class.create! tim_attributes
+
+    tim_identity_card_attributes = { name: 'Tim', gender_code: '1', birth_date: '1980-07-01' }
+    identity_card_model = IdentityCard.create! tim_identity_card_attributes
+
+    it_behaves_like 'assert_present!', model, :own_identity_card!, [ identity_card, { at: Time.now } ], [ { 0 => :identity_card }, :at ]
+
+  end
 
 end
 ```
