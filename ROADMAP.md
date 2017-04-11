@@ -50,3 +50,7 @@
 
 ## v0.10
 1. Assert Present shared examples
+
+## v0.10.1
+1. Improve the Scope shared examples to separate the Monomorphic Scope shared examples, & the Polymorphic Scope shared examples
+2. Improve the Validates shared examples to separate the Validates Text shared examples, & the Validates Numericality shared examples
