@@ -46,7 +46,7 @@
 2. Validates Numericality shared examples
 
 ## v0.9.1
-1. Improve the Validates Text shared examples for the length
+1. Improved the Validates Text shared examples for the length
 
 ## v0.10
 1. Assert Present shared examples
