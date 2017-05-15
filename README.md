@@ -229,7 +229,7 @@ require 'rails_helper'
 
 describe Person, type: :model do
 
-  context '.validates' do
+  context do
 
     tim_attributes = { name: 'Tim', age: 28 }
 
